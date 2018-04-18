@@ -5317,8 +5317,8 @@
       }
     },
     "eslint-config-wpcalypso": {
-      "version": "3.0.0",
-      "integrity": "sha512-AyKNbVrITBicI9zfz5F3Y2q8DrmVvLW7NG7YEN9sYHlh08208qelBbbx6xHAcbmmeBk4N/rqLpNoEOX0bkmzvw==",
+      "version": "2.0.0",
+      "integrity": "sha512-m/G31U8K2U5qV/u/BOHSTNtJGOBDR7Y84rH5hRBMhg/jWcXnJCEPy1sA0tFKfPL1GMJkJOosRVGTdMqMjiZJoQ==",
       "dev": true
     },
     "eslint-eslines": {
@@ -17227,6 +17227,10 @@
     "text-table": {
       "version": "0.2.0",
       "integrity": "sha1-f17oI66AUgfACvLfSoTsP8+lcLQ="
+    },
+    "textarea-caret": {
+      "version": "3.1.0",
+      "integrity": "sha512-cXAvzO9pP5CGa6NKx0WYHl+8CHKZs8byMkt3PCJBCmq2a34YA9pO1NrQET5pzeqnBjBdToF5No4rrmkDUgQC2Q=="
     },
     "textextensions": {
       "version": "2.2.0",
