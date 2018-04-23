@@ -24,6 +24,11 @@ jest.mock( 'lib/redux-bridge', () => ( {
 	reduxGetState: () => ( { ui: { editor: { saveBlockers: [] } } } ),
 } ) );
 
+// mock required by the ad-tracking library
+jest.mock( 'lib/user-settings', () => ( {
+	getSetting: () => null,
+} ) );
+
 const sampleSite = {
 	ID: 123,
 	jetpack: false,

@@ -15,6 +15,7 @@ import { v4 as uuid } from 'uuid';
 import config from 'config';
 import productsValues from 'lib/products-values';
 import userModule from 'lib/user';
+import userSettings from 'lib/user-settings';
 import { loadScript as loadScriptCallback } from 'lib/load-script';
 import { shouldSkipAds } from 'lib/analytics/utils';
 import { promisify } from '../../utils';
@@ -324,7 +325,7 @@ async function loadTrackingScripts( callback ) {
 
 	// init Facebook
 	if ( isFacebookEnabled ) {
-		window.fbq( 'init', TRACKING_IDS.facebookInit );
+		initFacebook();
 	}
 
 	// init Bing
@@ -1239,6 +1240,52 @@ function costToUSD( cost, currency ) {
  */
 function isSupportedCurrency( currency ) {
 	return Object.keys( EXCHANGE_RATES ).indexOf( currency ) !== -1;
+}
+
+/**
+ * Initializes the Facebook pixel, including the advanced matching
+ */
+function initFacebook() {
+	const currentUser = user.get();
+
+	if ( ! currentUser ) {
+		// simple tracking, no advanced matching
+		window.fbq( 'init', TRACKING_IDS.facebookInit );
+
+		return;
+	}
+
+	// ADVANCED MATCHING requirements
+	// https://developers.facebook.com/docs/facebook-pixel/pixel-with-ads/conversion-tracking#advanced_match
+	// All data must be in lowercase. Remove all spaces.
+	const fbRequirementsFormatter = function( str ) {
+		return str.toLowerCase().replace( / /g, '' );
+	};
+
+	// build the FB object, but don't include the keys that are not defined
+	const userEmail = currentUser.email;
+	const userFirstName = userSettings.getSetting( 'first_name' );
+	const userLastName = userSettings.getSetting( 'last_name' );
+
+	let advancedMatching = {
+		em: fbRequirementsFormatter( userEmail ),
+	};
+
+	if ( userFirstName ) {
+		advancedMatching = Object.assign( advancedMatching, {
+			fn: fbRequirementsFormatter( userFirstName ),
+		} );
+	}
+
+	if ( userLastName ) {
+		advancedMatching = Object.assign( advancedMatching, {
+			ln: fbRequirementsFormatter( userLastName ),
+		} );
+	}
+
+	debug( 'FB Advanced Matching', advancedMatching );
+
+	window.fbq( 'init', TRACKING_IDS.facebookInit, advancedMatching );
 }
 
 /**
