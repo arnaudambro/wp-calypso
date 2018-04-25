@@ -50,8 +50,8 @@ export class PlansFeaturesMain extends Component {
 		 *
 		 * @TODO: When happychat correctly handles site switching, remove selectHappychatSiteId action.
 		 */
-		const siteId = get( this.props, [ 'site', 'ID' ] );
-		const nextSiteId = get( nextProps, [ 'site', 'ID' ] );
+		const { siteId } = this.props;
+		const nextSiteId = nextProps.siteId;
 		if ( siteId !== nextSiteId && nextSiteId ) {
 			this.props.selectHappychatSiteId( nextSiteId );
 		}
@@ -68,7 +68,7 @@ export class PlansFeaturesMain extends Component {
 			selectedFeature,
 			selectedPlan,
 			withSaleInfo,
-			site,
+			siteId,
 		} = this.props;
 
 		return (
@@ -87,7 +87,7 @@ export class PlansFeaturesMain extends Component {
 					selectedFeature={ selectedFeature }
 					selectedPlan={ selectedPlan }
 					withSaleInfo={ withSaleInfo }
-					site={ site }
+					siteId={ siteId }
 				/>
 			</div>
 		);
@@ -176,7 +176,7 @@ export class PlansFeaturesMain extends Component {
 	};
 
 	render() {
-		const { domainName, site, displayJetpackPlans, isInSignup, isLoggedIn } = this.props;
+		const { domainName, siteId, displayJetpackPlans, isInSignup, isLoggedIn } = this.props;
 		let faqs = null;
 
 		if ( ! isInSignup ) {
@@ -189,7 +189,7 @@ export class PlansFeaturesMain extends Component {
 				<div className="plans-features-main__notice" />
 				{ displayJetpackPlans ? this.getIntervalTypeToggle() : null }
 				<QueryPlans />
-				<QuerySitePlans siteId={ get( site, 'ID' ) } />
+				<QuerySitePlans siteId={ siteId } />
 				{ this.getPlanFeatures() }
 				<PlanFooter isInSignup={ isInSignup } isJetpack={ displayJetpackPlans } />
 				{ faqs }
@@ -214,7 +214,7 @@ PlansFeaturesMain.propTypes = {
 	selectedFeature: PropTypes.string,
 	selectedPlan: PropTypes.string,
 	showFAQ: PropTypes.bool,
-	site: PropTypes.object,
+	siteId: PropTypes.number,
 	siteSlug: PropTypes.string,
 };
 
@@ -225,7 +225,7 @@ PlansFeaturesMain.defaultProps = {
 	isChatAvailable: false,
 	isLoggedIn: false,
 	showFAQ: true,
-	site: {},
+	siteId: null,
 	siteSlug: '',
 };
 
@@ -233,6 +233,7 @@ export default connect(
 	( state, { site } ) => ( {
 		isChatAvailable: isHappychatAvailable( state ),
 		isLoggedIn: !! getCurrentUserId( state ),
+		siteId: get( site, [ 'ID' ] ),
 		siteSlug: getSiteSlug( state, get( site, [ 'ID' ] ) ),
 	} ),
 	{ selectHappychatSiteId }
