@@ -20,6 +20,7 @@ import InlineHelpSearchResults from './inline-help-search-results';
 import InlineHelpSearchCard from './inline-help-search-card';
 import HelpContact from 'me/help/help-contact';
 import { getSearchQuery } from 'state/inline-help/selectors';
+import { resetInlineHelpContactForm } from 'state/inline-help/actions';
 import { getHelpSelectedSite } from 'state/help/selectors';
 
 class InlineHelpPopover extends Component {
@@ -62,6 +63,7 @@ class InlineHelpPopover extends Component {
 	toggleContactForm = () => {
 		if ( this.state.showContactForm ) {
 			this.props.recordTracksEvent( 'calypso_inlinehelp_contact_hide' );
+			this.props.resetContactForm();
 		} else {
 			this.props.recordTracksEvent( 'calypso_inlinehelp_contact_show' );
 		}
@@ -135,5 +137,6 @@ export default connect(
 	} ),
 	{
 		recordTracksEvent,
+		resetContactForm: resetInlineHelpContactForm,
 	}
 )( localize( InlineHelpPopover ) );

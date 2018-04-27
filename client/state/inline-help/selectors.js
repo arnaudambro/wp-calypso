@@ -61,3 +61,13 @@ export function getInlineHelpCurrentlySelectedLink( state ) {
 	const result = get( results, getSelectedResult( state ), null );
 	return get( result, 'link', '' );
 }
+
+/**
+ * Returns a bool indicating if the contact form UI is showing the Q&A suggestions.
+ *
+ * @param  {Object}  state  Global state tree
+ * @return {Boolean}        Is the contact form UI showing the questions
+ */
+export function isShowingQandAInlineHelpContactForm( state ) {
+	return get( state, 'inlineHelpSearchResults.contactForm.isShowingQandASuggestions' );
+}
