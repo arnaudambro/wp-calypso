@@ -56,7 +56,7 @@ export function resetInlineHelpContactForm() {
 		dispatch( {
 			type: INLINE_HELP_CONTACT_FORM_RESET,
 		} );
-	}
+	};
 }
 
 /**
@@ -69,7 +69,7 @@ export function showQandAOnInlineHelpContactForm() {
 		dispatch( {
 			type: INLINE_HELP_CONTACT_FORM_SHOW_QANDA,
 		} );
-	}
+	};
 }
 
 /**
