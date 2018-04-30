@@ -19,6 +19,7 @@ import { getCurrentUser } from 'state/current-user/selectors';
 import { writeComment, deleteComment, replyComment } from 'state/comments/actions';
 import { recordAction, recordGaEvent, recordTrackForPost } from 'reader/stats';
 import { isCommentableDiscoverPost } from 'blocks/comments/helper';
+import withUserMentions from 'blocks/user-mentions/index';
 
 class PostCommentForm extends React.Component {
 	constructor( props ) {
@@ -268,4 +269,4 @@ export default connect(
 		currentUser: getCurrentUser( state ),
 	} ),
 	{ writeComment, deleteComment, replyComment }
-)( PostCommentForm );
+)( withUserMentions( PostCommentForm ) );

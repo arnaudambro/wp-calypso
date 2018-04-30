@@ -14,18 +14,18 @@ import UserMentionSuggestionList from './suggestion-list';
 const keys = { enter: 13, esc: 27, spaceBar: 32, upArrow: 38, downArrow: 40 };
 
 /**
- * withUserMentionSuggestions is a higher-order component that adds user mention support to whatever input it wraps.
+ * addUserMentions is a higher-order component that adds user mention support to whatever input it wraps.
  *
- * @example: withUserMentionSuggestions( Component )
+ * @example: addUserMentions( Component )
  *
  * @param {object} EnhancedComponent - react component to wrap
  * @returns {object} the enhanced component
  */
 export default EnhancedComponent =>
-	class withUserMentions extends React.Component {
+	class addUserMentions extends React.Component {
 		matchingSuggestions = [];
 
-		static displayName = `withUserMentions( ${ EnhancedComponent.displayName ||
+		static displayName = `addUserMentions( ${ EnhancedComponent.displayName ||
 			EnhancedComponent.name } )`;
 		static propTypes = {};
 		static defaultProps = {
