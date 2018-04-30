@@ -225,6 +225,7 @@ class PostCommentForm extends React.Component {
 									onFocus={ this.handleFocus }
 									onBlur={ this.handleBlur }
 									onChange={ this.handleTextChange }
+									siteId={ post.site_ID }
 								/>
 							</AutoDirection>
 						</div>

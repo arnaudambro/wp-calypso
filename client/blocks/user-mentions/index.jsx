@@ -18,11 +18,17 @@ const withUserMentions = WrappedComponent => {
 		};
 
 		render() {
-			return <WrappedComponent { ...this.props } />;
+			return <WrappedComponent { ...this.props } ref={ this.props.forwardedRef } />;
 		}
 	}
 
-	return connectUserMentions( addUserMentions( TextInputWrapper ) );
+	return connectUserMentions(
+		addUserMentions(
+			React.forwardRef( ( props, ref ) => {
+				return <TextInputWrapper { ...props } forwardedRef={ ref } />;
+			} )
+		)
+	);
 };
 
 export default withUserMentions;
