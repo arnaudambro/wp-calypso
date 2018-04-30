@@ -271,7 +271,6 @@ class PostComment extends React.PureComponent {
 				commentText={ this.props.commentText }
 				onUpdateCommentText={ this.props.onUpdateCommentText }
 				onCommentSubmit={ this.props.onCommentSubmit }
-				siteId={ this.props.post && this.props.post.site_ID }
 			/>
 		);
 	}
