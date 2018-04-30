@@ -2,16 +2,13 @@
 /**
  * External dependencies
  */
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import QueryUsersSuggestions from 'components/data/query-users-suggestions';
 import { getUserSuggestions } from 'state/users/suggestions/selectors';
 import PropTypes from 'prop-types';
 
-/**
- * Internal dependencies
- */
-const connectUserMentions = Component => {
+const connectUserMentions = WrappedComponent => {
 	class connectUserMentionsFetcher extends React.PureComponent {
 		static propTypes = {
 			siteId: PropTypes.number,
@@ -21,7 +18,7 @@ const connectUserMentions = Component => {
 			return (
 				<div>
 					{ !! this.props.siteId && <QueryUsersSuggestions siteId={ this.props.siteId } /> }
-					<Component { ...this.props } />
+					<WrappedComponent { ...this.props } />
 				</div>
 			);
 		}
