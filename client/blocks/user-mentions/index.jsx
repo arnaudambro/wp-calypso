@@ -2,7 +2,7 @@
 /**
  * External dependencies
  */
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 /**
@@ -12,7 +12,7 @@ import connectUserMentions from './connect';
 import addUserMentions from './add';
 
 const withUserMentions = WrappedComponent => {
-	class TextInput extends React.PureComponent {
+	class TextInputWrapper extends React.PureComponent {
 		static propTypes = {
 			siteId: PropTypes.number,
 		};
@@ -22,7 +22,7 @@ const withUserMentions = WrappedComponent => {
 		}
 	}
 
-	return connectUserMentions( addUserMentions( TextInput ) );
+	return connectUserMentions( addUserMentions( TextInputWrapper ) );
 };
 
 export default withUserMentions;

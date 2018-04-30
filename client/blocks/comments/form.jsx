@@ -19,7 +19,7 @@ import { getCurrentUser } from 'state/current-user/selectors';
 import { writeComment, deleteComment, replyComment } from 'state/comments/actions';
 import { recordAction, recordGaEvent, recordTrackForPost } from 'reader/stats';
 import { isCommentableDiscoverPost } from 'blocks/comments/helper';
-import withUserMentions from 'blocks/user-mentions/index';
+import PostCommentFormTextarea from './form-textarea';
 
 class PostCommentForm extends React.Component {
 	constructor( props ) {
@@ -216,8 +216,7 @@ class PostCommentForm extends React.Component {
 								<br />
 							</pre>
 							<AutoDirection>
-								<textarea
-									className="comments__form-textarea"
+								<PostCommentFormTextarea
 									value={ this.state.commentText }
 									placeholder={ translate( 'Enter your comment here…' ) }
 									ref={ this.handleTextAreaNode }
@@ -269,4 +268,4 @@ export default connect(
 		currentUser: getCurrentUser( state ),
 	} ),
 	{ writeComment, deleteComment, replyComment }
-)( withUserMentions( PostCommentForm ) );
+)( PostCommentForm );
